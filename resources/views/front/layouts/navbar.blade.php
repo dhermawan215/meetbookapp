@@ -92,14 +92,18 @@
                     <span class="user-name text-white">{{ Auth::user()->name }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                    <a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Profile</a>
-                    <a class="dropdown-item" href="profile.html"><i class="dw dw-settings2"></i> Setting</a>
-                    <a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Help</a>
+                    <a class="dropdown-item" href="{{ route('profile.show') }}"><i class="dw dw-user1"></i> Profile</a>
+                    <a class="dropdown-item" href="{{ route('profile.show') }}"><i class="dw dw-settings2"></i>
+                        Setting</a>
+
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="dropdown-item"><i class="dw dw-logout"></i> Log Out</button>
                     </form>
-
+                    @if (Auth::user()->roles == 'admin')
+                        <a class="dropdown-item" href="{{ route('dashboard') }}"><i class="bi bi-people"></i></i> Admin
+                            Dashboard</a>
+                    @endif
                 </div>
             </div>
         </div>

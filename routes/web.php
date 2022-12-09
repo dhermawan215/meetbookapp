@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminRoom;
 use App\Http\Controllers\Dashboard;
 use Illuminate\Support\Facades\Route;
 
@@ -29,15 +30,17 @@ Route::get('/', function () {
 //     })->name('dashboard');
 // });
 Route::prefix('app')
-    ->middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])
+    ->middleware(['auth:sanctum', config('jetstream.auth_session'),  'verified'])
     ->group(function () {
         Route::get('/', [Dashboard::class, 'index'])->name('app.dashboard');
     });
 
 Route::prefix('dashboard')
     ->middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])
+    ->middleware('admin')
     ->group(function () {
-        Route::get('/dashboard', function () {
+        Route::get('/', function () {
             return view('dashboard');
         })->name('dashboard');
+        Route::resource('room', AdminRoom::class);
     });

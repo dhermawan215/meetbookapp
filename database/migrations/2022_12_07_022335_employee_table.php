@@ -19,7 +19,7 @@ class EmployeeTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone');
-            $table->text('address');
+            $table->text('employee_address');
             $table->string('department');
         });
     }

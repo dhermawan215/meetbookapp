@@ -8,6 +8,9 @@
 <link rel="stylesheet" type="text/css"
     href="{{ asset('/front/src/plugins/datatables/css/responsive.bootstrap4.min.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('/front/vendors/styles/style.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('/front/src/plugins/fullcalendar/fullcalendar.css') }}" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"></script>

@@ -2,67 +2,114 @@
 @section('content')
     <div class="main-container">
         <div class="xs-pd-20-10 pd-ltr-20">
-            <div class="title pb-20">
-                <h2 class="h3 mb-0">Dashboard Overview</h2>
-            </div>
-            <div class="row pb-10">
-                <div class="col-md-8 mb-20">
-                    <div class="card-box height-100-p pd-20">
-                        <div class="d-flex flex-wrap justify-content-between align-items-center pb-0 pb-md-3">
-                            <div class="h5 mb-md-0">Hospital Activities</div>
-                            <div class="form-group mb-md-0">
-                                <select class="form-control form-control-sm selectpicker">
-                                    <option value="">Last Week</option>
-                                    <option value="">Last Month</option>
-                                    <option value="">Last 6 Month</option>
-                                    <option value="">Last 1 year</option>
-                                </select>
+            <div class="row pb-10 ">
+                <div class="col-lg-10 col-md-8 col-sm-12">
+                    <div class="min-height-200px">
+                        <div class="page-header">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="title">
+                                        <h4>Calendar</h4>
+                                    </div>
+                                    <nav aria-label="breadcrumb" role="navigation">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item">
+                                                <a href="index.html">Home</a>
+                                            </li>
+                                            <li class="breadcrumb-item active" aria-current="page">
+                                                Calendar
+                                            </li>
+                                        </ol>
+                                    </nav>
+                                </div>
                             </div>
                         </div>
-                        <div id="activities-chart"></div>
+                        <div class="pd-20 card-box mb-30">
+                            <div class="calendar-wrap">
+                                <div id="calendar"></div>
+                            </div>
+                            <!-- calendar modal -->
+                            <div id="modal-view-event" class="modal modal-top fade calendar-modal">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <h4 class="h4">
+                                                <span class="event-icon weight-400 mr-3"></span><span
+                                                    class="event-title"></span>
+                                            </h4>
+                                            <div class="event-body"></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                                Close
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="modal-view-event-add" class="modal modal-top fade calendar-modal">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <form id="add-event">
+                                            <div class="modal-body">
+                                                <h4 class="text-blue h4 mb-10">Add Event Detail</h4>
+                                                <div class="form-group">
+                                                    <label>Event name</label>
+                                                    <input type="text" class="form-control" name="ename" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Event Date</label>
+                                                    <input type="text" class="datetimepicker form-control"
+                                                        name="edate" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Event Description</label>
+                                                    <textarea class="form-control" name="edesc"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Event Color</label>
+                                                    <select class="form-control" name="ecolor">
+                                                        <option value="fc-bg-default">fc-bg-default</option>
+                                                        <option value="fc-bg-blue">fc-bg-blue</option>
+                                                        <option value="fc-bg-lightgreen">
+                                                            fc-bg-lightgreen
+                                                        </option>
+                                                        <option value="fc-bg-pinkred">fc-bg-pinkred</option>
+                                                        <option value="fc-bg-deepskyblue">
+                                                            fc-bg-deepskyblue
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Event Icon</label>
+                                                    <select class="form-control" name="eicon">
+                                                        <option value="circle">circle</option>
+                                                        <option value="cog">cog</option>
+                                                        <option value="group">group</option>
+                                                        <option value="suitcase">suitcase</option>
+                                                        <option value="calendar">calendar</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">
+                                                    Save
+                                                </button>
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-20">
-                    <div class="card-box min-height-200px pd-20 mb-20" data-bgcolor="#455a64">
-                        <div class="d-flex justify-content-between pb-20 text-white">
-                            <div class="icon h1 text-white">
-                                <i class="fa fa-calendar" aria-hidden="true"></i>
-                                <!-- <i class="icon-copy fa fa-stethoscope" aria-hidden="true"></i> -->
-                            </div>
-                            <div class="font-14 text-right">
-                                <div><i class="icon-copy ion-arrow-up-c"></i> 2.69%</div>
-                                <div class="font-12">Since last month</div>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-end">
-                            <div class="text-white">
-                                <div class="font-14">Appointment</div>
-                                <div class="font-24 weight-500">1865</div>
-                            </div>
-                            <div class="max-width-150">
-                                <div id="appointment-chart"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-box min-height-200px pd-20" data-bgcolor="#265ed7">
-                        <div class="d-flex justify-content-between pb-20 text-white">
-                            <div class="icon h1 text-white">
-                                <i class="fa fa-stethoscope" aria-hidden="true"></i>
-                            </div>
-                            <div class="font-14 text-right">
-                                <div><i class="icon-copy ion-arrow-down-c"></i> 3.69%</div>
-                                <div class="font-12">Since last month</div>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-end">
-                            <div class="text-white">
-                                <div class="font-14">Surgery</div>
-                                <div class="font-24 weight-500">250</div>
-                            </div>
-                            <div class="max-width-150">
-                                <div id="surgery-chart"></div>
-                            </div>
-                        </div>
+                <div class="col-lg-2 col-md-2 col-sm-12">
+                    <div class="mt-2 card-box">
+                        hsh
                     </div>
                 </div>
             </div>
@@ -70,5 +117,4 @@
     </div>
 @endsection
 @push('script')
-    <script></script>
 @endpush
