@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-2 sm:px-20 bg-white border-b border-gray-200">
 
@@ -49,11 +49,19 @@
                 </div>
             </div>
 
+
             {{-- data table --}}
-            <div class="mt-4 bg-[#F9FAFB] overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="mt-3 bg-[#F9FAFB] overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="mb-1 mt-2 py-4 px-4">
+                    <a href="{{ route('room.create') }}"
+                        class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                        + Add data
+                    </a>
+                </div>
+
                 <div class="mx-auto px-2">
                     <!--Card-->
-                    <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white text-left">
+                    <div id='recipients' class="p-8 mt-3 lg:mt-0 rounded shadow bg-white text-left">
                         <table id="example" class="stripe hover"
                             style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                             <thead>
@@ -67,20 +75,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
-                                    <td>2011/04/25</td>
-                                    <td>
-                                        <div class="flex">
-                                            <div class="flex items-center">
-                                                <a href="" title="edit" class="mr-3 text-blue-500"><i
-                                                        class="bi bi-pencil-square"></i></a>
-                                                <form id="DeleteForm" action="" method="POST" class="mr-3">
-                                                    {!! method_field('delete') . csrf_field() !!}
-                                                    <button type="submit" id="BtnDelete" " data-toggle=" tooltip"
+                                @php
+                                    $no = 1;
+                                @endphp
+                                @forelse ($room as $row)
+                                    <tr>
+                                        <td>{{ $no++ }}</td>
+                                        <td>{{ $row->nama_ruang }}</td>
+                                        <td>{{ $row->kapasitas }}</td>
+                                        <td>{{ $row->fasilitas }}</td>
+                                        <td>{{ $row->lokasi }}</td>
+                                        <td>
+                                            <div class="flex">
+                                                <div class="flex items-center">
+                                                    <a href="" title="edit" class="mr-3 text-blue-500"><i
+                                                            class="bi bi-pencil-square"></i></a>
+                                                    <form id="DeleteForm" action="" method="POST" class="mr-3">
+                                                        {!! method_field('delete') . csrf_field() !!}
+                                                        <button type="submit" id="BtnDelete" " data-toggle=" tooltip"
                                                         title="delete"    class="show_confirm text-red-500"><i class="bi bi-trash"></i></button>
                                                     </form>
 
@@ -89,53 +101,77 @@
                                         </div>
                                     </td>
                                 </tr>
-
-                                <!-- Rest of your data (refer to https://datatables.net/examples/server_side/ for server side processing)-->
-
-
+            @empty
+ @endforelse
 
                             </tbody>
-
                         </table>
-
-
                     </div>
                     <!--/Card-->
-
-
                 </div>
                 <!--/container-->
             </div>
         </div>
     </div>
     @push('scripts')
-    <script>
-        $(document).ready(function() {
-
-            var table = $('#example').DataTable({
-                    responsive: true
-                })
-                .columns.adjust()
-                .responsive.recalc();
-        });
-
-        $('.show_confirm').click(function(event) {
-            var form = $(this).closest("form");
-            var name = $(this).data("name");
-            event.preventDefault();
-            swal({
-                    title: `Apakah anda yakin?`,
-                    text: "Data yang terhapus tidak dapat dikembalikan!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        form.submit();
-                    }
+        <script>
+            const success = '{{ Session::has('success') }}';
+            const info = '{{ Session::has('info') }}';
+            const danger = '{{ Session::get('danger') }}';
+            const msgSuccess = '{{ Session::get('success') }}';
+            const msgInfo = '{{ Session::get('info') }}';
+            const msgDanger = '{{ Session::get('danger') }}';
+            if (success) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: msgSuccess,
+                    showConfirmButton: false,
+                    timer: 1500
                 });
-        });
-    </script>
-@endpush
+            }
+            if (info) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: msgInfo,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+            if (danger) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: msgDanger,
+                })
+            }
+
+            $(document).ready(function() {
+                var table = $('#example').DataTable({
+                        responsive: true
+                    })
+                    .columns.adjust()
+                    .responsive.recalc();
+            });
+
+            $('.show_confirm').click(function(event) {
+                var form = $(this).closest("form");
+                var name = $(this).data("name");
+                event.preventDefault();
+                swal({
+                        title: `Apakah anda yakin?`,
+                        text: "Data yang terhapus tidak dapat dikembalikan!",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            form.submit();
+                        }
+                    });
+            });
+        </script>
+    @endpush
 </x-app-layout>

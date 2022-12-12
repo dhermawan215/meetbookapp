@@ -142,6 +142,8 @@
 
     <script src="{{ asset('/front/js/jquery-3-6-0.min.js') }}"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="{{ asset('/front/src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
 
     <script src="{{ asset('/front/src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>

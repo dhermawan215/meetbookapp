@@ -13,7 +13,7 @@ class RoomRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class RoomRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nama_ruang' => 'required|max:255',
+            'kapasitas' => 'required|max:255',
+            'fasilitas' => 'required',
+            'lokasi' => 'required|max:255'
         ];
     }
 }
