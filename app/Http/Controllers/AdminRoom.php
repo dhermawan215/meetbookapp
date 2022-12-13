@@ -63,7 +63,10 @@ class AdminRoom extends Controller
      */
     public function edit($id)
     {
-        //
+        $room = Room::findOrFail($id);
+        return view('pages.room.edit', [
+            'data' => $room,
+        ]);
     }
 
     /**
@@ -73,9 +76,13 @@ class AdminRoom extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RoomRequest $request, $id)
     {
-        //
+        $data = $request->all();
+        $room = Room::find($id);
+        $room->update($data);
+
+        return \redirect()->route('room.index')->with('info', 'data was update');
     }
 
     /**
@@ -86,6 +93,8 @@ class AdminRoom extends Controller
      */
     public function destroy($id)
     {
-        //
+        $room = Room::find($id);
+        $room->delete();
+        return \redirect()->route('room.index')->with('danger', 'data was deleted');
     }
 }

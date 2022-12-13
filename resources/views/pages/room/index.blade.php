@@ -88,22 +88,22 @@
                                         <td>
                                             <div class="flex">
                                                 <div class="flex items-center">
-                                                    <a href="" title="edit" class="mr-3 text-blue-500"><i
+                                                    <a href="{{ route('room.edit', $row->id) }}" title="edit"
+                                                        class="mr-3 text-blue-500"><i
                                                             class="bi bi-pencil-square"></i></a>
-                                                    <form id="DeleteForm" action="" method="POST" class="mr-3">
+                                                    <form id="DeleteForm"
+                                                        action="{{ route('room.destroy', $row->id) }}" method="POST"
+                                                        class="mr-3">
                                                         {!! method_field('delete') . csrf_field() !!}
-                                                        <button type="submit" id="BtnDelete" " data-toggle=" tooltip"
-                                                        title="delete"    class="show_confirm text-red-500"><i class="bi bi-trash"></i></button>
+                                                        <button type="submit" id="BtnDelete" " data-toggle="tooltip"
+                                                        title="delete" class="show_confirm text-red-500"><i class="bi bi-trash"></i></button>
                                                     </form>
-
-
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
-            @empty
+@empty
  @endforelse
-
                             </tbody>
                         </table>
                     </div>
@@ -146,7 +146,6 @@
                     text: msgDanger,
                 })
             }
-
             $(document).ready(function() {
                 var table = $('#example').DataTable({
                         responsive: true
@@ -154,23 +153,23 @@
                     .columns.adjust()
                     .responsive.recalc();
             });
-
             $('.show_confirm').click(function(event) {
                 var form = $(this).closest("form");
                 var name = $(this).data("name");
                 event.preventDefault();
-                swal({
-                        title: `Apakah anda yakin?`,
-                        text: "Data yang terhapus tidak dapat dikembalikan!",
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            form.submit();
-                        }
-                    });
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
             });
         </script>
     @endpush
