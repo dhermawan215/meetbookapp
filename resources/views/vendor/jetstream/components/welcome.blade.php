@@ -76,7 +76,7 @@
             <div class="mt-2 text-sm text-gray-500">
                 Kelola data booking ruang meeting dimenu ini.
             </div>
-            <a href="#">
+            <a href="{{ route('transaction.index') }}">
                 <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
                     <div>Klik disini!</div>
 
@@ -101,7 +101,7 @@
 
         <div class="ml-12">
             <div class="mt-2 text-sm text-gray-500">
-                <a href="#">
+                <a href="{{ route('app.dashboard') }}">
                     <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
                         <div>Klik disini!</div>
 

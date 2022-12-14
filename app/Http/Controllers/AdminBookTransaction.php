@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booked;
 use Illuminate\Http\Request;
 
 class AdminBookTransaction extends Controller
@@ -13,7 +14,10 @@ class AdminBookTransaction extends Controller
      */
     public function index()
     {
-        //
+        $transaction = Booked::with('user, transaction')->get();
+        return \view('pages.transaction.index', [
+            'data' => $transaction,
+        ]);
     }
 
     /**
@@ -45,7 +49,7 @@ class AdminBookTransaction extends Controller
      */
     public function show($id)
     {
-        //
+        return \view('pages.transaction.detail');
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminBookTransaction;
 use App\Http\Controllers\AdminRoom;
 use App\Http\Controllers\Dashboard;
 use Illuminate\Support\Facades\Route;
@@ -43,4 +44,5 @@ Route::prefix('dashboard')
             return view('dashboard');
         })->name('dashboard');
         Route::resource('room', AdminRoom::class);
+        Route::resource('transaction', AdminBookTransaction::class);
     });
