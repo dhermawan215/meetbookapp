@@ -1,6 +1,6 @@
 <div class="left-side-bar">
     <div class="brand-logo">
-        <a href="#">
+        <a href="{{ route('app.dashboard') }}">
             <img src="vendors/images/deskapp-logo.svg" alt="" class="dark-logo" />
             <img src="vendors/images/deskapp-logo-white.svg" alt="" class="light-logo" />
         </a>
@@ -12,25 +12,18 @@
         <div class="sidebar-menu">
             <ul id="accordion-menu">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle">
+                    <a href="{{ route('app.dashboard') }}" class="dropdown-toggle">
                         <span class="micon bi bi-house"></span><span class="mtext">Home</span>
                     </a>
 
                 </li>
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon bi bi-textarea-resize"></span><span class="mtext">Forms</span>
+                        <span class="micon bi bi-calendar-date"></span><span class="mtext">Agenda</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="form-basic.html">Form Basic</a></li>
-                        <li>
-                            <a href="advanced-components.html">Advanced Components</a>
-                        </li>
-                        <li><a href="form-wizard.html">Form Wizard</a></li>
-                        <li><a href="html5-editor.html">HTML5 Editor</a></li>
-                        <li><a href="form-pickers.html">Form Pickers</a></li>
-                        <li><a href="image-cropper.html">Image Cropper</a></li>
-                        <li><a href="image-dropzone.html">Image Dropzone</a></li>
+                        <li><a href="{{ route('agenda.create') }}">Add Agenda</a></li>
+                        <li><a href="{{ route('agenda.index') }}">Your Agenda</a></li>
                     </ul>
                 </li>
 

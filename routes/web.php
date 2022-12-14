@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\AdminBookTransaction;
+use App\Http\Controllers\Agenda;
 use App\Http\Controllers\AdminRoom;
 use App\Http\Controllers\Dashboard;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminBookTransaction;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,7 @@ Route::prefix('app')
     ->middleware(['auth:sanctum', config('jetstream.auth_session'),  'verified'])
     ->group(function () {
         Route::get('/', [Dashboard::class, 'index'])->name('app.dashboard');
+        Route::resource('agenda', Agenda::class);
     });
 
 Route::prefix('dashboard')
