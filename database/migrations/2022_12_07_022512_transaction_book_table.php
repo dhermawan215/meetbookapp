@@ -24,8 +24,8 @@ class TransactionBookTable extends Migration
             $table->date('end_date');
             $table->time('start_time');
             $table->time('end_time');
-            $table->string('participants');
-            $table->string('note');
+            $table->string('participants')->nullable();
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }

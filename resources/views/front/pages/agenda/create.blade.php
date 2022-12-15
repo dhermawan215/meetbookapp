@@ -52,20 +52,20 @@
 
                             </div>
                         </div>
-                        <form action="{{ route('agenda.create') }}" method="POST">
+                        <form action="{{ route('agenda.store') }}" method="post">
                             @csrf
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Activity</label>
                                 <div class="col-sm-12 col-md-10">
                                     <input class="form-control" type="text" placeholder="Activity of meeting"
-                                        name="activity" id="activity" />
+                                        name="activity" id="activity" value="{{ old('activity') }}" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Topic</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" placeholder="topic of meeting" type="text"
-                                        name="topic" />
+                                    <input class="form-control" placeholder="topic of meeting" type="text" name="topic"
+                                        value="{{ old('topic') }}" />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -90,39 +90,43 @@
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Start Date</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" name="start_date" type="date" />
+                                    <input class="form-control" name="start_date" type="date"
+                                        value="{{ old('start_date') }}" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">End Date</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" name="end_date" type="date" />
+                                    <input class="form-control" name="end_date" type="date"
+                                        value="{{ old('end_date') }}" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Start Time</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" placeholder="Select time" type="time"
-                                        name="start_time" />
+                                    <input class="form-control" placeholder="Select time" type="time" name="start_time"
+                                        value="{{ old('start_time') }}" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">End Time</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" placeholder="Select time" type="time" name="end_time" />
+                                    <input class="form-control" placeholder="Select time" type="time" name="end_time"
+                                        value="{{ old('end_time') }}" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Participants</label>
                                 <div class="col-sm-12 col-md-10">
                                     <input class="form-control" placeholder="enter your participants" type="text"
-                                        name="participants" />
+                                        name="participants" value="{{ old('participants') }}" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Notes</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" placeholder="notes" type="text" name="note" />
+                                    <input class="form-control" placeholder="notes" type="text" name="note"
+                                        value="{{ old('note') }}" />
                                 </div>
                             </div>
                             <div class="flex">

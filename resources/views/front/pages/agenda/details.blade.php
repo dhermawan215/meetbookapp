@@ -20,7 +20,7 @@
                                                 <a href="{{ route('agenda.index') }}">Agenda</a>
                                             </li>
                                             <li class="breadcrumb-item active">
-                                                Edit Agenda
+                                                Detail Agenda
                                             </li>
                                         </ol>
                                     </nav>
@@ -30,119 +30,83 @@
                     </div>
                 </div>
             </div>
-            @if ($errors->any())
-                <div class="row pb-10">
-                    <div class="col-12">
-                        <div class="alert alert-danger" role="alert">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            @endif
             <div class="row pb-10">
                 <div class="col-lg-12 col-md-12 col-sm-12 mt-1">
                     <div class="pd-20 card-box mb-30">
                         <div class="clearfix mb-2">
                             <div class="pull-left">
-                                <h4 class="text-blue h4">Edit Your Meeting Agenda</h4>
-
+                                <h4 class="text-blue h4">Detail Meeting Agenda No: {{ $data->book_no }} </h4>
                             </div>
                         </div>
-                        <form action="{{ route('agenda.update', $data->id) }}" method="post">
-                            @method('PUT')
+                        <form>
                             @csrf
-                            <div class="form-group row">
-                                <label class="col-sm-12 col-md-2 col-form-label">Book No</label>
-                                <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" type="text" name="book_no" id="book_no"
-                                        value="{{ $data->book_no }}" disabled />
-                                </div>
-                            </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Activity</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" type="text" placeholder="Activity of meeting"
-                                        name="activity" id="activity" value="{{ old('activity') ?? $data->activity }}" />
+                                    <input class="form-control" type="text" id="activity" disabled
+                                        value="{{ $data->activity }}" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Topic</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" placeholder="topic of meeting" type="text" name="topic"
-                                        value="{{ old('topic') ?? $data->topic }}" />
+                                    <input class="form-control" type="text" disabled value="{{ $data->topic }}" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Room</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <select name="room_id" id="room" class="form-control">
-                                        <option selected value="{{ $data->room_id }}">{{ $data->rooms->nama_ruang }}
-                                        </option>
-                                        <option disabled>-Select Room-</option>
-                                        @foreach ($room as $rowdata)
-                                            <option value="{{ $rowdata->id }}">{{ $rowdata->nama_ruang }}</option>
-                                        @endforeach
-                                    </select>
+                                    <input class="form-control" type="text" disabled
+                                        value="{{ $data->rooms->nama_ruang }}" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">User</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" value="{{ $data->user_id }}" name="user_id"
-                                        type="hidden" />
-                                    <input class="form-control" value="{{ $data->user->name }}" type="text" disabled />
+                                    <input class="form-control" type="text" disabled value="{{ $data->user->name }}" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Start Date</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" name="start_date" type="date"
-                                        value="{{ old('start_date') ?? $data->start_date }}" />
+                                    <input class="form-control" type="text" disabled value="{{ $data->start_date }}" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">End Date</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" name="end_date" type="date"
-                                        value="{{ old('end_date') ?? $data->end_date }}" />
+                                    <input class="form-control" type="text" disabled value="{{ $data->end_date }}" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Start Time</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" placeholder="Select time" type="time" name="start_time"
-                                        value="{{ old('start_time') ?? $data->start_time }}" />
+                                    <input class="form-control" type="text" disabled value="{{ $data->start_time }}" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">End Time</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" placeholder="Select time" type="time" name="end_time"
-                                        value="{{ old('end_time') ?? $data->end_time }}" />
+                                    <input class="form-control" type="text" disabled value="{{ $data->end_time }}" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Participants</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" placeholder="enter your participants" type="text"
-                                        name="participants" value="{{ old('participants') ?? $data->activity }}" />
+                                    <input class="form-control" type="text" disabled
+                                        value="{{ $data->participants ?? 'no data available' }}" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Notes</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" placeholder="notes" type="text" name="note"
-                                        value="{{ old('note') ?? $data->note }}" />
+                                    <input class="form-control" type="text" disabled
+                                        value="{{ $data->note ?? 'no data available' }}" />
                                 </div>
                             </div>
-                            <div class="flex">
-                                <button type="submit" class="btn btn-success">Update</button>
-                                <button type="reset" class="btn btn-danger">Reset</button>
-                                <a href="{{ route('app.dashboard') }}" class="btn btn-outline-warning">Cancel</a>
+                            <div class="">
+                                <a href="{{ route('agenda.index') }}" class="btn btn-outline-danger"> <i
+                                        class="bi bi-arrow-left-circle"></i>Back</a>
                             </div>
                         </form>
                     </div>
@@ -150,12 +114,4 @@
             </div>
         </div>
     </div>
-    @push('script')
-        <script>
-            $("#room").select2({
-                responsive: true,
-                width: '100%'
-            });
-        </script>
-    @endpush
 @endsection

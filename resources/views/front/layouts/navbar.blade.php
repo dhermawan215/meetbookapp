@@ -98,7 +98,8 @@
 
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="dropdown-item"><i class="dw dw-logout"></i> Log Out</button>
+                        <button type="submit" class="logout dropdown-item"><i class="dw dw-logout"></i> Log
+                            Out</button>
                     </form>
                     @if (Auth::user()->roles == 'admin')
                         <a class="dropdown-item" href="{{ route('dashboard') }}"><i class="bi bi-people"></i></i> Admin

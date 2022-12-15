@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Booked extends Model
 {
@@ -30,8 +30,8 @@ class Booked extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function room()
+    public function rooms()
     {
-        return $this->belongsTo(Booked::class, 'room_id', 'id');
+        return $this->belongsTo(Room::class, 'room_id', 'id');
     }
 }

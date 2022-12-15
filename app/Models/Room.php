@@ -18,8 +18,8 @@ class Room extends Model
         'lokasi'
     ];
 
-    public function roomBooks()
+    public function room()
     {
-        return $this->hasMany(Booked::class, 'room_id', 'id');
+        return $this->hashMany(Booked::class, 'room_id', 'id');
     }
 }

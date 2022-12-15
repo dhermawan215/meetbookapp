@@ -47,7 +47,7 @@
                                         <td>{{ $no++ }}</td>
                                         <td>{{ $row->activity }}</td>
                                         <td>{{ $row->topic }}</td>
-                                        <td>{{ $row->room->nama_ruang }}</td>
+                                        <td>{{ $row->rooms->nama_ruang }}</td>
                                         <td>{{ $row->start_date }}</td>
                                         <td>
                                             <div class="dropdown">
@@ -56,8 +56,12 @@
                                                     <i class="dw dw-more"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                                    <a class="dropdown-item" href=""><i class="dw dw-edit2"></i>
+                                                    <a class="dropdown-item" href="{{ route('agenda.edit', $row->id) }}"><i
+                                                            class="dw dw-edit2"></i>
                                                         Edit</a>
+                                                    <a class="dropdown-item" href="{{ route('agenda.show', $row->id) }}"><i
+                                                            class="dw dw-eye"></i>
+                                                        Details</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -73,5 +77,38 @@
         </div>
     </div>
     @push('script')
+        <script>
+            const success = '{{ Session::has('success') }}';
+            const info = '{{ Session::has('info') }}';
+            const danger = '{{ Session::get('danger') }}';
+            const msgSuccess = '{{ Session::get('success') }}';
+            const msgInfo = '{{ Session::get('info') }}';
+            const msgDanger = '{{ Session::get('danger') }}';
+            if (success) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: msgSuccess,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+            if (info) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: msgInfo,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+            if (danger) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Deleted',
+                    text: msgDanger,
+                })
+            }
+        </script>
     @endpush
 @endsection
