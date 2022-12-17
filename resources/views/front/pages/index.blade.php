@@ -41,20 +41,9 @@
                             <div class="card-header text-center" style="background: rgb(5, 130, 255)">
                                 <p class="text-white font-weight-bold">Agenda</p>
                             </div>
-
-
-                            <ol class="list-group list-group-light list-group-numbered">
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <div class="fw-bold">Judul Meeting</div>
-                                        <div class="text-muted">Lokasi: Ruang Meeting Jababeka</div>
-                                        <div class="text-primary">Booked by: Admin</div>
-                                    </div>
-                                    <span class="badge rounded-pill badge-success">Time: 12.00-13.00</span>
-                                </li>
+                            <ol id="list2" class="list-group list-group-light list-group-numbered">
 
                             </ol>
-
                         </div>
                     </div>
                 </div>
@@ -64,15 +53,72 @@
     @push('script')
         <script>
             $(document).ready(function() {
+                getdata();
                 getValueDate();
             });
+
+            function getdata() {
+                $.ajax({
+                    type: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    url: "{{ route('api.dashboard') }}",
+                    dataType: "json",
+                    success: function(result) {
+                        const json = JSON.stringify(result);
+                        let json2 = JSON.parse(json);
+                        json2.data.forEach(element => {
+
+                            $('#list2').append(
+                                '<li id="listofdata" class="list-group-item d-flex justify-content-between align-items-center" ><div><p class="font-weight-bold">' +
+                                element['activity'] +
+                                '</p><p  class="text-muted">Lokasi:' + element['rooms'][
+                                    'nama_ruang'
+                                ] + '</p><p class="text-primary">Booked by:' + element[
+                                    'user']['name'] +
+                                '</p></div> <span class="badge rounded-pill badge-success">Time: ' +
+                                element['start_time'] + '-' + element['end_time'] +
+                                '</span></li>'
+                            );
+                        });
+                    }
+                });
+            }
 
             function getValueDate() {
                 $('#startDate').change(function(e) {
                     e.preventDefault();
                     const valdate = document.getElementById('startDate').value;
-                    console.info(valdate);
 
+                    $('#list2').empty();
+
+                    $.ajax({
+                        type: "GET",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        url: "http://192.168.56.56/api/current/" + valdate,
+                        dataType: "json",
+                        success: function(result) {
+                            const json = JSON.stringify(result);
+                            let json2 = JSON.parse(json);
+                            json2.data.forEach(element => {
+                                console.info(element);
+                                $('#list2').prepend(
+                                    '<li class="list-group-item d-flex justify-content-between align-items-center" ><div><p class="font-weight-bold">' +
+                                    element['activity'] +
+                                    '</p><p  class="text-muted">Lokasi:' + element['rooms'][
+                                        'nama_ruang'
+                                    ] + '</p><p class="text-primary">Booked by:' + element[
+                                        'user']['name'] +
+                                    '</p></div> <span class="badge rounded-pill badge-success">Time: ' +
+                                    element['start_time'] + '-' + element['end_time'] +
+                                    '</span></li>'
+                                );
+                            });
+                        }
+                    });
                 });
             }
         </script>

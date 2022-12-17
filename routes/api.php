@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AgendaRestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route::middleware('auth:sanctum')->group(function () {
+Route::get('current', [AgendaRestController::class, 'index'])->name('api.dashboard');
+Route::get('current/{date}', [AgendaRestController::class, 'date'])->name('api.date');
+// });
