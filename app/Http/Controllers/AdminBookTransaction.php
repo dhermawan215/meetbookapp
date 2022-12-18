@@ -14,7 +14,7 @@ class AdminBookTransaction extends Controller
      */
     public function index()
     {
-        $transaction = Booked::with('user, transaction')->get();
+        $transaction = Booked::with('user', 'rooms')->get();
         return \view('pages.transaction.index', [
             'data' => $transaction,
         ]);

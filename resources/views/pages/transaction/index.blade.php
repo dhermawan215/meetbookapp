@@ -76,12 +76,12 @@
                                         <td>{{ $no++ }}</td>
                                         <td>{{ $row->book_no }}</td>
                                         <td>{{ $row->start_date }}</td>
-                                        <td>{{ $row->room->nama_ruang }}</td>
-                                        <td>{{ $row->user->username }}</td>
+                                        <td>{{ $row->rooms->nama_ruang }}</td>
+                                        <td>{{ $row->user->name }}</td>
                                         <td>
                                             <div class="flex">
                                                 <div class="flex items-center">
-                                                    <a href="{{ route('transaction.show', $row->id) }}" title="edit"
+                                                    <a href="{{ route('transaction.show', $row->id) }}" title="detail"
                                                         class="mr-3 text-blue-500"><i class="bi bi-eye"></i></a>
                                                 </div>
                                             </div>
