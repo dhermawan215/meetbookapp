@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css"
     href="{{ asset('/front/src/plugins/datatables/css/responsive.bootstrap4.min.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('/front/vendors/styles/style.css') }}" />
-<link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+{{-- <link rel="stylesheet" href="{{ asset('css/custom.css') }}"> --}}
 <link rel="stylesheet" type="text/css" href="{{ asset('/front/src/plugins/fullcalendar/fullcalendar.css') }}" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 
