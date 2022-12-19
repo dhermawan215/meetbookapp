@@ -34,9 +34,11 @@
     {{-- navbar start --}}
     @include('front.layouts.navbar')
     {{-- navbar end --}}
-    {{-- sidebar start --}}
-    @include('front.layouts.sidebar')
-    {{-- sidebar end --}}
+    @auth
+        {{-- sidebar start --}}
+        @include('front.layouts.sidebar')
+        {{-- sidebar end --}}
+    @endauth
     <div class="mobile-menu-overlay"></div>
 
     {{-- content --}}

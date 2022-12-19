@@ -10,4 +10,9 @@ class Dashboard extends Controller
     {
         return \view('front.pages.index');
     }
+
+    public function agenda()
+    {
+        return \view('front.pages.agenda');
+    }
 }

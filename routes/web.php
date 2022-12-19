@@ -20,6 +20,7 @@ use App\Http\Controllers\AdminBookTransaction;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/agenda', [Dashboard::class, 'agenda'])->name('agenda');
 // Route::get('/home', [Dashboard::class, 'index'])->name('home');
 
 // Route::middleware([
