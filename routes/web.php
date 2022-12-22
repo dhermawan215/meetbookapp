@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminRoom;
 use App\Http\Controllers\Dashboard;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminBookTransaction;
+use App\Http\Controllers\AdminEmployee;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,7 @@ use App\Http\Controllers\AdminBookTransaction;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/agenda', [Dashboard::class, 'agenda'])->name('agenda');
+Route::get('/agenda', [Dashboard::class, 'agenda'])->name('search.agenda');
 // Route::get('/home', [Dashboard::class, 'index'])->name('home');
 
 // Route::middleware([
@@ -48,4 +49,5 @@ Route::prefix('dashboard')
         })->name('dashboard');
         Route::resource('room', AdminRoom::class);
         Route::resource('transaction', AdminBookTransaction::class);
+        Route::resource('employee', AdminEmployee::class);
     });

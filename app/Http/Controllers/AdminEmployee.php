@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Hash;
 
 class AdminEmployee extends Controller
 {
@@ -13,7 +16,10 @@ class AdminEmployee extends Controller
      */
     public function index()
     {
-        //
+        $data = User::where('roles', 'user')->get();
+        return \view('pages.employee.index', [
+            'data' => $data
+        ]);
     }
 
     /**
@@ -23,7 +29,7 @@ class AdminEmployee extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.employee.create');
     }
 
     /**
@@ -32,9 +38,17 @@ class AdminEmployee extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $data = $request->all();
+        User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'roles' => $data['roles']
+        ]);
+
+        return \redirect()->route('employee.index')->with('success', 'user akun berhasil dibuat');
     }
 
     /**
@@ -56,7 +70,10 @@ class AdminEmployee extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return \view('pages.employee.edit', [
+            'data' => $user
+        ]);
     }
 
     /**
@@ -66,9 +83,24 @@ class AdminEmployee extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
+        $data = $request->all();
+        $user = User::findOrFail($id);
+        $email = $data['email'];
+
+        if ($email != $user->email) {
+            $rules['email'] = 'required|string|email|max:255|unique:users';
+        }
+
+        $user->update([
+            'name' => $data['name'],
+            'emai' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'roles' => $data['roles']
+        ]);
+
+        return \redirect()->route('employee.index')->with('info', 'data updated');
     }
 
     /**
@@ -79,6 +111,9 @@ class AdminEmployee extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFsil($id);
+        $user->delete();
+
+        return \redirect()->route('employee.index')->with('danger', 'data was deleted');
     }
 }

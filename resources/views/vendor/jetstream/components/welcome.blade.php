@@ -49,7 +49,7 @@
                 Kelola semua data karyawan
             </div>
 
-            <a href="#">
+            <a href="{{ route('employee.index') }}">
                 <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
                     <div>Klik disini!</div>
 

@@ -49,7 +49,10 @@ class AdminBookTransaction extends Controller
      */
     public function show($id)
     {
-        return \view('pages.transaction.detail');
+        $data = Booked::with('user', 'rooms')->findOrFail($id);
+        return \view('pages.transaction.detail', [
+            'data' => $data
+        ]);
     }
 
     /**

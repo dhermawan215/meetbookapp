@@ -17,7 +17,8 @@ class Employee extends Model
         'last_name',
         'phone',
         'employee_address',
-        'department'
+        'department',
+        'company'
     ];
 
     public function user()
