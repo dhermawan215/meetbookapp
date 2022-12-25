@@ -76,8 +76,8 @@
                                         <td>{{ $no++ }}</td>
                                         <td>{{ $row->book_no }}</td>
                                         <td>{{ $row->start_date }}</td>
-                                        <td>{{ $row->rooms->nama_ruang }}</td>
-                                        <td>{{ $row->user->name }}</td>
+                                        <td>{{ $row->rooms->nama_ruang ?? 'Data Not Found' }}</td>
+                                        <td>{{ $row->user->name ?? 'Data Not Found' }}</td>
                                         <td>
                                             <div class="flex">
                                                 <div class="flex items-center">

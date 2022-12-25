@@ -47,7 +47,7 @@
                                         <td>{{ $no++ }}</td>
                                         <td>{{ $row->activity }}</td>
                                         <td>{{ $row->topic }}</td>
-                                        <td>{{ $row->rooms->nama_ruang }}</td>
+                                        <td>{{ $row->rooms->nama_ruang ?? 'data not found' }}</td>
                                         <td>{{ $row->start_date }}</td>
                                         <td>
                                             <div class="dropdown">

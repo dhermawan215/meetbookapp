@@ -166,7 +166,7 @@
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Yes, delete it!'
                 }).then((willDelete) => {
-                    if (willDelete) {
+                    if (willDelete.value) {
                         form.submit();
                     }
                 });

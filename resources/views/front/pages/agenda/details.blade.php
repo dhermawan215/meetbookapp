@@ -57,13 +57,14 @@
                                 <label class="col-sm-12 col-md-2 col-form-label">Room</label>
                                 <div class="col-sm-12 col-md-10">
                                     <input class="form-control" type="text" disabled
-                                        value="{{ $data->rooms->nama_ruang }}" />
+                                        value="{{ $data->rooms->nama_ruang ?? 'data not found' }}" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">User</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" type="text" disabled value="{{ $data->user->name }}" />
+                                    <input class="form-control" type="text" disabled
+                                        value="{{ $data->user->name ?? 'data not found' }}" />
                                 </div>
                             </div>
                             <div class="form-group row">
