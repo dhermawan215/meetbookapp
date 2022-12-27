@@ -28,7 +28,7 @@ class AgendaRestController extends Controller
         $transaction = Booked::with('user', 'rooms')->where('start_date', $d)->get();
         // check if data null
         if ($transaction->isEmpty()) {
-            return ResponseFormatter::error('null', 'Data Note Found', 200);
+            return ResponseFormatter::error('null', 'Data Note Found', 404);
         } else {
             return ResponseFormatter::success($transaction, 'success');
         }
@@ -39,7 +39,7 @@ class AgendaRestController extends Controller
         $transaction = Booked::with('user', 'rooms')->where('start_date', $date)->get();
         // check if data null
         if ($transaction->isEmpty()) {
-            return ResponseFormatter::error('null', 'Data Note Found', 201);
+            return ResponseFormatter::error('null', 'Data Note Found', 404);
         } else {
             return ResponseFormatter::success($transaction, 'success');
         }

@@ -85,6 +85,11 @@
                                 '</span></li>'
                             );
                         });
+                    },
+                    error: function(xhr, status, error) {
+                        $('#list2').prepend(
+                            '<li class="list-group-item d-flex justify-content-between align-items-center" > Data Meeting Belum Tersedia</li>'
+                        );
                     }
                 });
             }
@@ -107,7 +112,7 @@
                             const json = JSON.stringify(result);
                             let json2 = JSON.parse(json);
                             json2.data.forEach(element => {
-                                console.info(element);
+
                                 $('#list2').prepend(
                                     '<li class="list-group-item d-flex justify-content-between align-items-center" ><div><div class="d-flex"><p class="font-12">Start: ' +
                                     element['start_date'] +
@@ -123,6 +128,11 @@
                                     '</span></li>'
                                 );
                             });
+                        },
+                        error: function(xhr, status, error) {
+                            $('#list2').prepend(
+                                '<li class="list-group-item d-flex justify-content-between align-items-center" > Data Meeting Belum Tersedia</li>'
+                            );
                         }
                     });
                 });

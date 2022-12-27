@@ -12,7 +12,7 @@
                     </a>
                 </div>
             </div>
-            <div class="user-notification">
+            {{-- <div class="user-notification">
                 <div class="dropdown">
                     <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
                         <i class="icon-copy dw dw-notification text-white"></i>
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="user-info-dropdown">
                 <div class="dropdown mt-2 pt-1">
@@ -163,8 +163,7 @@
                 <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" id="sidebariconlist-1" name="menu-list-icon" class="custom-control-input"
                         value="icon-list-style-1" checked="" />
-                    <label class="custom-control-label" for="sidebariconlist-1"><i
-                            class="ion-minus-round"></i></label>
+                    <label class="custom-control-label" for="sidebariconlist-1"><i class="ion-minus-round"></i></label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" id="sidebariconlist-2" name="menu-list-icon" class="custom-control-input"
