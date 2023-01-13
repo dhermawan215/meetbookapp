@@ -9,25 +9,38 @@
         </div>
     </div>
     <div class="menu-block customscroll">
-        <div class="sidebar-menu">
-            <ul id="accordion-menu">
-                <li class="dropdown">
-                    <a href="{{ route('app.dashboard') }}" class="dropdown-toggle">
-                        <span class="micon bi bi-house"></span><span class="mtext">Home</span>
-                    </a>
+        @if (Auth::user())
+            <div class="sidebar-menu">
+                <ul id="accordion-menu">
+                    <li class="dropdown">
+                        <a href="{{ route('app.dashboard') }}" class="dropdown-toggle">
+                            <span class="micon bi bi-house"></span><span class="mtext">Home</span>
+                        </a>
 
-                </li>
-                <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon bi bi-calendar-date"></span><span class="mtext">Agenda</span>
-                    </a>
-                    <ul class="submenu">
-                        <li><a href="{{ route('agenda.create') }}">Add Agenda</a></li>
-                        <li><a href="{{ route('agenda.index') }}">Your Agenda</a></li>
-                    </ul>
-                </li>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle">
+                            <span class="micon bi bi-calendar-date"></span><span class="mtext">Agenda</span>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="{{ route('agenda.create') }}">Add Agenda</a></li>
+                            <li><a href="{{ route('agenda.index') }}">Your Agenda</a></li>
+                        </ul>
+                    </li>
 
-            </ul>
-        </div>
+                </ul>
+            </div>
+        @else
+            <div class="sidebar-menu">
+                <ul id="accordion-menu">
+                    <li class="dropdown">
+                        <a href="/" class="dropdown-toggle">
+                            <span class="micon bi bi-house"></span><span class="mtext">Dashboard</span>
+                        </a>
+
+                    </li>
+                </ul>
+            </div>
+        @endif
     </div>
 </div>
