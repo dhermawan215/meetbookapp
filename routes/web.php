@@ -6,6 +6,9 @@ use App\Http\Controllers\Dashboard;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminBookTransaction;
 use App\Http\Controllers\AdminEmployee;
+use App\Http\Controllers\AdminUserAttendance;
+use App\Http\Controllers\AdminUserRegistered;
+use App\Http\Controllers\Galadinner;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +25,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/agenda', [Dashboard::class, 'agenda'])->name('search.agenda');
+
+
+Route::get('/galadinner', [Galadinner::class, 'index'])->name('galadiner.index');
+Route::post('/galadinner/store', [Galadinner::class, 'store'])->name('galadiner.post');
+Route::get('/galadinner/{id}', [Galadinner::class, 'success'])->name('galadiner.success');
 // Route::get('/home', [Dashboard::class, 'index'])->name('home');
 
 // Route::middleware([
@@ -50,4 +58,7 @@ Route::prefix('dashboard')
         Route::resource('room', AdminRoom::class);
         Route::resource('transaction', AdminBookTransaction::class);
         Route::resource('employee', AdminEmployee::class);
+        Route::resource('user-registered', AdminUserRegistered::class);
+        Route::resource('user-attendance', AdminUserAttendance::class);
+        Route::get('/userattendance/excel', [AdminUserAttendance::class, 'excel'])->name('userattendance.excel');
     });
