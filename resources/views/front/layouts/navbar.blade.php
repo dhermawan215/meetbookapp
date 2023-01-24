@@ -112,6 +112,26 @@
             </div>
         </div>
     @endauth
+
+    @guest
+        <div class="header-right">
+            <div class="dashboard-setting user-notification">
+                <div class="dropdown">
+                    <a class="dropdown-toggle no-arrow" href="javascript:;" data-toggle="right-sidebar">
+                        <i class="dw dw-settings2 text-white"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="user-info-dropdown">
+                <div class="mt-2 pt-1">
+                    <a href="{{ route('login') }}" class="text-white font-weight-bold p-1 mt-2 mr-3">Login</a>
+
+                </div>
+            </div>
+
+        </div>
+    @endguest
 </div>
 
 <div class="right-sidebar">

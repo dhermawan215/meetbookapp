@@ -14,7 +14,7 @@
                                     <nav aria-label="breadcrumb" role="navigation">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"><i class="bi bi-house"></i>
-                                                <a href="{{ route('app.dashboard') }}">Home</a>
+                                                <a href="{{ route('search.agenda') }}">Home</a>
                                             </li>
                                             <li class="breadcrumb-item">
                                                 <a href="{{ route('agenda.index') }}">Agenda</a>
@@ -77,18 +77,6 @@
                                 <label class="col-sm-12 col-md-2 col-form-label">End Date</label>
                                 <div class="col-sm-12 col-md-10">
                                     <input class="form-control" type="text" disabled value="{{ $data->end_date }}" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-12 col-md-2 col-form-label">Start Time</label>
-                                <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" type="text" disabled value="{{ $data->start_time }}" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-12 col-md-2 col-form-label">End Time</label>
-                                <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" type="text" disabled value="{{ $data->end_time }}" />
                                 </div>
                             </div>
                             <div class="form-group row">

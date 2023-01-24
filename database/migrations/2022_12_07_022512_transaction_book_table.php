@@ -20,10 +20,8 @@ class TransactionBookTable extends Migration
             $table->string('topic');
             $table->bigInteger('room_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->time('start_time');
-            $table->time('end_time');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
             $table->string('participants')->nullable();
             $table->string('note')->nullable();
             $table->timestamps();

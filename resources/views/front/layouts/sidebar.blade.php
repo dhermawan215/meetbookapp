@@ -1,6 +1,6 @@
 <div class="left-side-bar">
     <div class="brand-logo">
-        <a href="{{ route('app.dashboard') }}">
+        <a href="/">
             <img src="vendors/images/deskapp-logo.svg" alt="" class="dark-logo" />
             <img src="vendors/images/deskapp-logo-white.svg" alt="" class="light-logo" />
         </a>
@@ -13,7 +13,7 @@
             <div class="sidebar-menu">
                 <ul id="accordion-menu">
                     <li class="dropdown">
-                        <a href="{{ route('app.dashboard') }}" class="dropdown-toggle">
+                        <a href="/" class="dropdown-toggle">
                             <span class="micon bi bi-house"></span><span class="mtext">Home</span>
                         </a>
 

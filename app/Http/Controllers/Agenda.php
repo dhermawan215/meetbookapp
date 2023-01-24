@@ -9,6 +9,8 @@ use App\Models\Booked;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+date_default_timezone_set('Asia/Jakarta');
+
 class Agenda extends Controller
 {
     /**
@@ -47,6 +49,7 @@ class Agenda extends Controller
     public function store(TransactionRequest $request)
     {
 
+
         $now = Carbon::now();
         $auth = Auth::user()->id;
         $d = $now->day;
@@ -54,26 +57,45 @@ class Agenda extends Controller
         $Y = $now->year;
         $second = $now->second;
         $roomid = $request->room_id;
-        $data = $request->all();
+        $masuk = $request->all();
         //format nomer booking
         //tahun bulan hari ruang user user detik
         $book_no = $Y . $m . $d . ' ' . $roomid . ' ' . $auth . $second;
 
-        Booked::create([
-            'book_no' => $book_no,
-            'activity' => $data['activity'],
-            'topic' => $data['topic'],
-            'room_id' => $data['room_id'],
-            'user_id' => $data['user_id'],
-            'start_date' => $data['start_date'],
-            'end_date' => $data['end_date'],
-            'start_time' => $data['start_time'],
-            'end_time' => $data['end_time'],
-            'participants' => $data['participants'],
-            'note' => $data['note']
-        ]);
 
-        return \redirect()->route('agenda.index')->with('success', 'agenda saved!');
+        //validasi form khusus jam tanggal meeting
+        // $is_accepted = true;
+        $start_date_from_form = Carbon::parse($masuk['start_date']);
+        $end_date_from_form = Carbon::parse($masuk['end_date']);
+
+        $result_booking_meet = Booked::where('room_id', $roomid)
+            ->where(function ($query) use ($start_date_from_form, $end_date_from_form) {
+                $query->whereBetween('start_date',  [$start_date_from_form,  $end_date_from_form])
+                    ->orWhereBetween('end_date', [$start_date_from_form,  $end_date_from_form]);
+                // $query->where(('start_date', '>=', $start_date_from_form), 'AND' ,($end_date_from_form,  '>=', 'end_date'))
+                //     ->orWhere('end_date', '>=', $start_date_from_form, 'AND',  $end_date_from_form, '<=', 'end_date')
+                //     ->where('start_date', '>=', $start_date_from_form, 'AND', 'start_date', '<=', $end_date_from_form)
+                //     ->orWhere('end_date', '>=', $start_date_from_form, 'AND', 'end_date', '<=', $end_date_from_form);
+            })->get();
+        // \ddd($result_booking_meet);
+
+        if ($result_booking_meet->isEmpty()) {
+            $save = Booked::create([
+                'book_no' => $book_no,
+                'activity' => $masuk['activity'],
+                'topic' => $masuk['topic'],
+                'room_id' => $masuk['room_id'],
+                'user_id' => $masuk['user_id'],
+                'start_date' => $start_date_from_form,
+                'end_date' =>  $end_date_from_form,
+                'participants' => $masuk['participants'],
+                'note' => $masuk['note']
+            ]);
+
+            return \redirect()->route('agenda.index')->with('success', 'agenda saved!');
+        } else {
+            return \redirect()->route('agenda.create')->with('danger', 'Oops, The agenda you chose is not available, please select another date');
+        }
     }
 
     /**

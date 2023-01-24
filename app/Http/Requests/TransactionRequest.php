@@ -31,8 +31,6 @@ class TransactionRequest extends FormRequest
             'user_id' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
-            'start_time' => 'required',
-            'end_time' => 'required',
             'participants' => 'nullable',
             'note' => 'nullable',
         ];

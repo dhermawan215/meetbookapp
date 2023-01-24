@@ -22,9 +22,12 @@ use App\Http\Controllers\Galadinner;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return redirect()->route('search.agenda');
 });
 Route::get('/agenda', [Dashboard::class, 'agenda'])->name('search.agenda');
+Route::get('/agenda/{id}', [Dashboard::class, 'show'])->name('search.agenda.detail');
+Route::get('/agenda/create/{id}', [Dashboard::class, 'create'])->name('search.agenda.create');
 
 
 Route::get('/galadinner', [Galadinner::class, 'index'])->name('galadiner.index');
@@ -44,7 +47,9 @@ Route::get('/galadinner/{id}', [Galadinner::class, 'success'])->name('galadiner.
 Route::prefix('app')
     ->middleware(['auth:sanctum', config('jetstream.auth_session'),  'verified'])
     ->group(function () {
-        Route::get('/', [Dashboard::class, 'index'])->name('app.dashboard');
+        Route::get('/', function () {
+            return redirect()->route('search.agenda');
+        });
         Route::resource('agenda', Agenda::class);
     });
 

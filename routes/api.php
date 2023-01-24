@@ -20,6 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Route::middleware('auth:sanctum')->group(function () {
-Route::get('current', [AgendaRestController::class, 'index'])->name('api.dashboard');
-Route::get('current/{date}', [AgendaRestController::class, 'date'])->name('api.date');
+Route::post('current', [AgendaRestController::class, 'index'])->name('api.dashboard');
+Route::post('date', [AgendaRestController::class, 'date'])->name('api.date');
 // });

@@ -34,7 +34,8 @@
                                     <th>Activity</th>
                                     <th>Topic</th>
                                     <th>Room</th>
-                                    <th>Date</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -49,6 +50,7 @@
                                         <td>{{ $row->topic }}</td>
                                         <td>{{ $row->rooms->nama_ruang ?? 'data not found' }}</td>
                                         <td>{{ $row->start_date }}</td>
+                                        <td>{{ $row->end_date }}</td>
                                         <td>
                                             <div class="dropdown">
                                                 <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"

@@ -19,8 +19,6 @@ class Booked extends Model
         'user_id',
         'start_date',
         'end_date',
-        'start_time',
-        'end_time',
         'participants',
         'note',
     ];
