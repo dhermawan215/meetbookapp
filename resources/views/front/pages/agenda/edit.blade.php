@@ -14,7 +14,7 @@
                                     <nav aria-label="breadcrumb" role="navigation">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"><i class="bi bi-house"></i>
-                                                <a href="{{ route('app.dashboard') }}">Home</a>
+                                                <a href="{{ route('search.agenda') }}">Home</a>
                                             </li>
                                             <li class="breadcrumb-item">
                                                 <a href="{{ route('agenda.index') }}">Agenda</a>
@@ -100,29 +100,15 @@
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Start Date</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" name="start_date" type="date"
+                                    <input class="form-control" name="start_date" type="datetime-local"
                                         value="{{ old('start_date') ?? $data->start_date }}" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">End Date</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" name="end_date" type="date"
+                                    <input class="form-control" name="end_date" type="datetime-local"
                                         value="{{ old('end_date') ?? $data->end_date }}" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-12 col-md-2 col-form-label">Start Time</label>
-                                <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" placeholder="Select time" type="time" name="start_time"
-                                        value="{{ old('start_time') ?? $data->start_time }}" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-12 col-md-2 col-form-label">End Time</label>
-                                <div class="col-sm-12 col-md-10">
-                                    <input class="form-control" placeholder="Select time" type="time" name="end_time"
-                                        value="{{ old('end_time') ?? $data->end_time }}" />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -142,7 +128,7 @@
                             <div class="flex">
                                 <button type="submit" class="btn btn-success">Update</button>
                                 <button type="reset" class="btn btn-danger">Reset</button>
-                                <a href="{{ route('app.dashboard') }}" class="btn btn-outline-warning">Cancel</a>
+                                <a href="{{ route('agenda.index') }}" class="btn btn-outline-warning">Cancel</a>
                             </div>
                         </form>
                     </div>

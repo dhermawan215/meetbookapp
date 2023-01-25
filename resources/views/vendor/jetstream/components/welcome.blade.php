@@ -101,7 +101,7 @@
 
         <div class="ml-12">
             <div class="mt-2 text-sm text-gray-500">
-                <a href="{{ route('app.dashboard') }}">
+                <a href="{{ route('search.agenda') }}">
                     <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
                         <div>Klik disini!</div>
 

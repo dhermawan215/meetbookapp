@@ -6,9 +6,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
+use App\Actions\Fortify\PasswordValidationRules;
 
 class AdminEmployee extends Controller
 {
+    use PasswordValidationRules;
     /**
      * Display a listing of the resource.
      *
@@ -83,21 +85,26 @@ class AdminEmployee extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $data = $request->all();
         $user = User::findOrFail($id);
-        $email = $data['email'];
+        $rules = [
+            'name' => 'required', 'string', 'max:255',
+            'email' => 'required', 'string', 'max:255', 'email', 'unique:users' . $user->email,
+            'roles' => 'required', 'string', 'max:255',
+            'password' => $this->passwordRules()
+        ];
+        // if ($request->email != $user->email) {
+        //     $rules = ['email' => 'required', 'string', 'max:255', 'email', 'unique:users',];
+        // }
 
-        if ($email != $user->email) {
-            $rules['email'] = 'required|string|email|max:255|unique:users';
-        }
-
+        $validatedata = $request->validate($rules);
+        // dd($validatedata);
         $user->update([
-            'name' => $data['name'],
-            'emai' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'roles' => $data['roles']
+            'name' => $validatedata['name'],
+            'emai' => $validatedata['email'],
+            'password' => Hash::make($validatedata['password']),
+            'roles' => $validatedata['roles']
         ]);
 
         return \redirect()->route('employee.index')->with('info', 'data updated');
@@ -111,7 +118,7 @@ class AdminEmployee extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFsil($id);
+        $user = User::findOrFail($id);
         $user->delete();
 
         return \redirect()->route('employee.index')->with('danger', 'data was deleted');
