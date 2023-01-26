@@ -194,17 +194,17 @@
                         json2.data.forEach(element => {
 
                             $('#list2').append(
-                                '<li id="listofdata" class="list-group-item d-flex justify-content-between align-items-center" ><div><div class="d-flex"><p class="font-12">Start: ' +
-                                element['start_date'] + '</p><p class="ml-3 font-12">End: ' + element[
+                                '<li id="listofdata" class="list-group-item d-flex justify-content-between align-items-center" ><div><div class="d-flex"><p class="font-12 text-success" style="font-weight: bold;">Start: ' +
+                                element['start_date'] +
+                                '</p><p class="ml-3 font-12 text-success" style="font-weight: bold;">End: ' +
+                                element[
                                     'end_date'] + '</p></div><p class="font-weight-bold">' +
                                 element['activity'] +
                                 '</p><p  class="text-muted">Lokasi:' + element['rooms'][
                                     'nama_ruang'
                                 ] + '</p><p class="text-primary">Booked by:' + element[
                                     'user']['name'] +
-                                '</p></div> <span class="badge rounded-pill badge-success">Time: ' +
-                                element['start_time'] + '-' + element['end_time'] +
-                                '</span></li>'
+                                '</p></div> '
                             );
                         });
                     },
@@ -248,18 +248,17 @@
                             json2.data.forEach(element => {
 
                                 $('#list2').prepend(
-                                    '<li class="list-group-item d-flex justify-content-between align-items-center" ><div><div class="d-flex"><p class="font-12">Start: ' +
+                                    '<li class="list-group-item d-flex justify-content-between align-items-center" ><div><div class="d-flex"><p class="font-12 text-success" style="font-weight: bold;">Start: ' +
                                     element['start_date'] +
-                                    '</p><p class="ml-3 font-12">End: ' + element[
+                                    '</p><p class="ml-3 font-12 text-success" style="font-weight: bold;">End: ' +
+                                    element[
                                         'end_date'] + '</p></div><p class="font-weight-bold">' +
                                     element['activity'] +
                                     '</p><p  class="text-muted">Lokasi:' + element['rooms'][
                                         'nama_ruang'
                                     ] + '</p><p class="text-primary">Booked by:' + element[
                                         'user']['name'] +
-                                    '</p></div> <span class="badge rounded-pill badge-success">Time: ' +
-                                    element['start_time'] + '-' + element['end_time'] +
-                                    '</span></li>'
+                                    '</p></div> '
                                 );
                             });
                         },

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Room;
+use App\Models\Booked;
 use Illuminate\Http\Request;
 
 class Dashboard extends Controller
@@ -14,8 +16,18 @@ class Dashboard extends Controller
 
     public function agenda()
     {
+        $now = Carbon::now();
+        $d = $now->toDateString();
+        $date_index = $now->toFormattedDateString();
         $room = Room::all();
-        return \view('front.pages.agenda-index', ['room' => $room]);
+        $transaction = Booked::with('user')->whereDate('start_date', $d)
+            ->orderBy('start_date', 'asc')
+            ->get();
+        return \view('front.pages.agenda-index', [
+            'room' => $room,
+            'booked' => $transaction,
+            'd' => $date_index
+        ]);
     }
 
     public function show($id)

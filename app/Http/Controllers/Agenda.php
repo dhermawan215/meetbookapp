@@ -70,8 +70,8 @@ class Agenda extends Controller
 
         $result_booking_meet = Booked::where('room_id', $roomid)
             ->where(function ($query) use ($start_date_from_form, $end_date_from_form) {
-                $query->whereBetween('start_date',  [$start_date_from_form,  $end_date_from_form])
-                    ->orWhereBetween('end_date', [$start_date_from_form,  $end_date_from_form]);
+                $query->whereBetween('start_date',  [$start_date_from_form,  $end_date_from_form->subSecond()])
+                    ->orWhereBetween('end_date', [$start_date_from_form,  $end_date_from_form->subSecond()]);
                 // $query->where(('start_date', '>=', $start_date_from_form), 'AND' ,($end_date_from_form,  '>=', 'end_date'))
                 //     ->orWhere('end_date', '>=', $start_date_from_form, 'AND',  $end_date_from_form, '<=', 'end_date')
                 //     ->where('start_date', '>=', $start_date_from_form, 'AND', 'start_date', '<=', $end_date_from_form)
@@ -94,7 +94,7 @@ class Agenda extends Controller
 
             return \redirect()->route('agenda.index')->with('success', 'agenda saved!');
         } else {
-            return \redirect()->route('agenda.create')->with('danger', 'Oops, The agenda you chose is not available, please select another date');
+            return \redirect()->route('agenda.create')->with('danger', 'Oops, The agenda you chose is not available, please select another date/time');
         }
     }
 

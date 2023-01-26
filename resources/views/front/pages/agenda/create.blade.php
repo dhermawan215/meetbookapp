@@ -139,7 +139,7 @@
             if (danger) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Opops, please select another date',
+                    title: 'Opops, please select another date/time',
                     text: msgDanger,
                 })
             }
