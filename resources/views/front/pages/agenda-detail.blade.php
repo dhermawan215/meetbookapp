@@ -36,7 +36,7 @@
                                                 <div class="card shadow-sm border-0 p-2">
                                                     <h5 class="card-title">Register your agenda</h5>
                                                     <div class="card-body">
-                                                        <form action="{{ route('agenda.store') }}" method="post">
+                                                        <form method="POST" id="agdform">
                                                             @csrf
                                                             <div class="form-group row">
                                                                 <label class="form-label">Activity</label>
@@ -50,13 +50,14 @@
                                                                 <label class="form-label">Topic</label>
 
                                                                 <input class="form-control" placeholder="topic of meeting"
-                                                                    type="text" name="topic" value="{{ old('topic') }}" />
+                                                                    type="text" name="topic" id="topic"
+                                                                    value="{{ old('topic') }}" />
 
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="form-label">Room</label>
 
-                                                                <select name="room_id" id="room" class="form-control">
+                                                                <select name="room_id" id="room_id" class="form-control">
                                                                     <option value="{{ $room->id }}" selected>
                                                                         {{ $room->nama_ruang }}</option>
                                                                 </select>
@@ -66,7 +67,7 @@
                                                                 <label class="form-label">User</label>
 
                                                                 <input class="form-control" value="{{ Auth::user()->id }}"
-                                                                    name="user_id" type="hidden" />
+                                                                    name="user_id" id="user_id" type="hidden" />
                                                                 <input class="form-control" value="{{ Auth::user()->name }}"
                                                                     type="text" disabled />
 
@@ -75,7 +76,7 @@
                                                                 <label class="form-label">Start
                                                                     Date</label>
 
-                                                                <input class="form-control" name="start_date"
+                                                                <input class="form-control" name="start_date" id="start_date"
                                                                     type="datetime-local" value="{{ old('start_date') }}" />
 
                                                             </div>
@@ -83,7 +84,7 @@
                                                                 <label class="form-label">End
                                                                     Date</label>
 
-                                                                <input class="form-control" name="end_date"
+                                                                <input class="form-control" name="end_date" id="end_date"
                                                                     type="datetime-local" value="{{ old('end_date') }}" />
 
                                                             </div>
@@ -94,19 +95,21 @@
 
                                                                 <input class="form-control"
                                                                     placeholder="enter your participants" type="text"
-                                                                    name="participants" value="{{ old('participants') }}" />
+                                                                    name="participants" id="participants"
+                                                                    value="{{ old('participants') }}" />
 
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="form-label">Notes</label>
 
-                                                                <input class="form-control" placeholder="notes" type="text"
-                                                                    name="note" value="{{ old('note') }}" />
+                                                                <input class="form-control" placeholder="notes" id="note"
+                                                                    type="text" name="note"
+                                                                    value="{{ old('note') }}" />
 
                                                             </div>
                                                             <div class="flex">
-                                                                <button type="submit" class="btn btn-primary">Save</button>
-                                                                <button type="reset" class="btn btn-danger">Reset</button>
+                                                                <button id="agdsubmit" class="btn btn-primary">Save</button>
+
                                                                 <a href="{{ route('search.agenda') }}"
                                                                     class="btn btn-outline-warning">Cancel</a>
                                                             </div>
@@ -165,6 +168,7 @@
             $(document).ready(function() {
                 getdata();
                 getValueDate();
+                submitForm();
             });
 
             function getdata() {
@@ -179,7 +183,7 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                         "contentType": "application/jsonrequest; charset=utf-8",
                     },
-                    url: "http://192.168.56.56/api/current",
+                    url: "{{ route('api.dashboard') }}",
                     data: {
                         room_id: id_room,
                     },
@@ -187,16 +191,16 @@
 
                     dataType: "json",
                     success: function(result) {
-                        console.log(result);
+
                         const json = JSON.stringify(result);
                         let json2 = JSON.parse(json);
 
                         json2.data.forEach(element => {
 
                             $('#list2').append(
-                                '<li id="listofdata" class="list-group-item d-flex justify-content-between align-items-center" ><div><div class="d-flex"><p class="font-12 text-success" style="font-weight: bold;">Start: ' +
+                                '<li id="listofdata" class="list-group-item d-flex justify-content-between align-items-center" ><div><div class="d-flex"><p class="font-12 text-danger" style="font-weight: bold;">Start: ' +
                                 element['start_date'] +
-                                '</p><p class="ml-3 font-12 text-success" style="font-weight: bold;">End: ' +
+                                '</p><p class="ml-3 font-12 text-danger" style="font-weight: bold;">End: ' +
                                 element[
                                     'end_date'] + '</p></div><p class="font-weight-bold">' +
                                 element['activity'] +
@@ -219,7 +223,8 @@
             function getValueDate() {
                 $('#startDate').change(function(e) {
                     e.preventDefault();
-                    const valdate = document.getElementById('startDate').value;
+                    const valdate = $('#startDate').val();
+                    // const valdate = document.getElementById('startDate').value;
                     const id_room = "{{ $room->id }}";
 
                     $('#list2').empty();
@@ -233,7 +238,7 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                             "contentType": "application/jsonrequest; charset=utf-8",
                         },
-                        url: "http://192.168.56.56/api/date",
+                        url: "{{ route('api.date') }}",
                         data: {
                             room_id: id_room,
                             date: valdate
@@ -242,15 +247,15 @@
 
                         dataType: "json",
                         success: function(result) {
-                            console.log(result)
+
                             const json = JSON.stringify(result);
                             let json2 = JSON.parse(json);
                             json2.data.forEach(element => {
 
                                 $('#list2').prepend(
-                                    '<li class="list-group-item d-flex justify-content-between align-items-center" ><div><div class="d-flex"><p class="font-12 text-success" style="font-weight: bold;">Start: ' +
+                                    '<li class="list-group-item d-flex justify-content-between align-items-center" ><div><div class="d-flex"><p class="font-12 text-danger" style="font-weight: bold;">Start: ' +
                                     element['start_date'] +
-                                    '</p><p class="ml-3 font-12 text-success" style="font-weight: bold;">End: ' +
+                                    '</p><p class="ml-3 font-12 text-danger" style="font-weight: bold;">End: ' +
                                     element[
                                         'end_date'] + '</p></div><p class="font-weight-bold">' +
                                     element['activity'] +
@@ -268,6 +273,47 @@
                             );
                         }
                     });
+                });
+            }
+
+            function submitForm() {
+                $("#agdsubmit").click(function(e) {
+                    e.preventDefault();
+
+                    let formdata = $("#agdform").serialize();
+                    $.ajax({
+                        type: "POST",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            "contentType": "application/jsonrequest; charset=utf-8",
+                        },
+                        url: "{{ route('api.store') }}",
+                        data: formdata,
+                        dataType: "json",
+                        success: function(response) {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Your agenda has been saved',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            getdata();
+                        },
+                        error: function(response) {
+
+                            const jsonRespone = JSON.stringify(response.responseJSON);
+                            let jsonRespone2 = JSON.parse(jsonRespone);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: jsonRespone2["data"],
+                            });
+
+                        }
+                    });
+
+
                 });
             }
         </script>

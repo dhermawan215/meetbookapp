@@ -22,4 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::middleware('auth:sanctum')->group(function () {
 Route::post('current', [AgendaRestController::class, 'index'])->name('api.dashboard');
 Route::post('date', [AgendaRestController::class, 'date'])->name('api.date');
+Route::post('store', [AgendaRestController::class, 'store'])->name('api.store');
 // });

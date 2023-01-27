@@ -25,7 +25,7 @@
                             <div class="row p-3">
 
                                 @foreach ($room as $rooms)
-                                    <div class="col-lg-4 mt-3">
+                                    <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
                                         <div class="card shadow-sm rounded" style="width: 18rem;">
                                             <div class="card-header text-white" style="background-color: rgb(54, 147, 235)">
                                                 <i class="bi bi-door-open"></i>
@@ -50,7 +50,7 @@
                                                                     <h4>{{ $meeting->activity }}
                                                                     </h4>
                                                                     <div class="mt-1"
-                                                                        style="color: rgb(6, 177, 28); font-weight:400;">
+                                                                        style="color: rgb(216, 3, 3); font-weight:500;">
                                                                         <p style="font-size: 14px;">Start
                                                                             Date: {{ $meeting->start_date }}</p>
                                                                         <p style="font-size: 14px">End Date:
@@ -65,7 +65,6 @@
                                                                 <p class="text-left p-1">Data Meeting Belum Tersedia
                                                                 </p>
                                                             @endforelse
-
 
                                                         </ul>
                                                     </div>
