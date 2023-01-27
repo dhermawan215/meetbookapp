@@ -58,12 +58,21 @@
                                                     <i class="dw dw-more"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                                    <a class="dropdown-item" href="{{ route('agenda.edit', $row->id) }}"><i
+                                                    {{-- <a class="dropdown-item" href="{{ route('agenda.edit', $row->id) }}"><i
                                                             class="dw dw-edit2"></i>
-                                                        Edit</a>
+                                                        Edit</a> --}}
                                                     <a class="dropdown-item" href="{{ route('agenda.show', $row->id) }}"><i
                                                             class="dw dw-eye"></i>
                                                         Details</a>
+                                                    <form id="agendadel" action="{{ route('agenda.destroy', $row->id) }}"
+                                                        method="POST">
+                                                        {!! method_field('delete') . csrf_field() !!}
+                                                        <button type="submit" onclick="deleteData()"
+                                                            class="dropdown-item text-danger show_confirm"><i
+                                                                class="icon-copy fa fa-trash" aria-hidden="true"></i> Delete
+                                                            Agenda</button>
+
+                                                    </form>
                                                 </div>
                                             </div>
                                         </td>
@@ -110,6 +119,27 @@
                     title: 'Deleted',
                     text: msgDanger,
                 })
+            }
+
+            function deleteData() {
+
+                var form = $(this).closest("form");
+                var name = $(this).data("name");
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((willDelete) => {
+                    if (willDelete.value) {
+                        $('#agendadel').submit();
+                    }
+                });
+
             }
         </script>
     @endpush

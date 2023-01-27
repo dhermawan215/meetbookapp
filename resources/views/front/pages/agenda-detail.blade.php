@@ -298,7 +298,7 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             });
-                            getdata();
+                            location.reload();
                         },
                         error: function(response) {
 

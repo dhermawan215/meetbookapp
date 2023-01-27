@@ -120,12 +120,12 @@ class Agenda extends Controller
      */
     public function edit($id)
     {
-        $room = Room::get();
-        $data = Booked::with('rooms', 'user')->findOrFail($id);
-        return \view('front.pages.agenda.edit', [
-            'data' => $data,
-            'room' => $room
-        ]);
+        // $room = Room::get();
+        // $data = Booked::with('rooms', 'user')->findOrFail($id);
+        // return \view('front.pages.agenda.edit', [
+        //     'data' => $data,
+        //     'room' => $room
+        // ]);
     }
 
     /**
@@ -137,10 +137,10 @@ class Agenda extends Controller
      */
     public function update(TransactionRequest $request, $id)
     {
-        $data = $request->all();
-        $trsc = Booked::find($id);
-        $trsc->update($data);
-        return \redirect()->route('agenda.index')->with('info', 'agenda updated!');
+        // $data = $request->all();
+        // $trsc = Booked::find($id);
+        // $trsc->update($data);
+        // return \redirect()->route('agenda.index')->with('info', 'agenda updated!');
     }
 
     /**
@@ -151,6 +151,8 @@ class Agenda extends Controller
      */
     public function destroy($id)
     {
-        //
+        $agenda = Booked::findOrFail($id);
+        $agenda->delete();
+        return \redirect()->route('agenda.index')->with('danger', 'agenda deleted!');
     }
 }
