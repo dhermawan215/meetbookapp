@@ -133,8 +133,10 @@
                 width: '100%'
             });
 
-            const danger = '{{ Session::get('danger') }}';
-            const msgDanger = '{{ Session::get('danger') }}';
+            const danger = '{{ Session::get('
+                                        danger ') }}';
+            const msgDanger = '{{ Session::get('
+                                        danger ') }}';
 
             if (danger) {
                 Swal.fire({

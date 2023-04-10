@@ -109,8 +109,9 @@ class AgendaRestController extends Controller
             ]);
 
             return ResponseFormatter::success($save, 'success');
-        } else {
-            return ResponseFormatter::error('error, please change your date/time agenda', 'Change Your Date', 404);
         }
+        // } else {
+        //     return ResponseFormatter::error('error, please change your date/time agenda', 'Change Your Date', 404);
+        // }
     }
 }

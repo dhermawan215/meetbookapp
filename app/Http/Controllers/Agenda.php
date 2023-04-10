@@ -92,6 +92,8 @@ class Agenda extends Controller
                 'note' => $masuk['note']
             ]);
 
+            // \dd($save);
+
             return \redirect()->route('agenda.index')->with('success', 'agenda saved!');
         } else {
             return \redirect()->route('agenda.create')->with('danger', 'Oops, The agenda you chose is not available, please select another date/time');

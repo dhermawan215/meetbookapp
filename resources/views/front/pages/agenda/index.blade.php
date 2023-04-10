@@ -89,7 +89,7 @@
     </div>
     @push('script')
         <script>
-            const success = '{{ Session::has('success') }}';
+            const success = "{{ Session::has('success') }}";
             const info = '{{ Session::has('info') }}';
             const danger = '{{ Session::get('danger') }}';
             const msgSuccess = '{{ Session::get('success') }}';

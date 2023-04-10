@@ -87,26 +87,29 @@ class AdminEmployee extends Controller
      */
     public function update(Request $request, $id)
     {
+        $requestall = $request->all();
         $user = User::findOrFail($id);
         $rules = [
-            'name' => 'required', 'string', 'max:255',
-            'email' => 'required', 'string', 'max:255', 'email', 'unique:users' . $user->email,
-            'roles' => 'required', 'string', 'max:255',
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'max:255', 'email'],
+            'roles' => ['required', 'string', 'max:255'],
             'password' => $this->passwordRules()
         ];
-        // if ($request->email != $user->email) {
-        //     $rules = ['email' => 'required', 'string', 'max:255', 'email', 'unique:users',];
-        // }
+
+        if ($request->email != $user->email) {
+            $rules = [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'max:255', 'email', 'unique:users'],
+                'roles' => ['required', 'string', 'max:255'],
+                'password' => $this->passwordRules()
+            ];
+            $validatedata = $request->validate($rules);
+        }
 
         $validatedata = $request->validate($rules);
-        // dd($validatedata);
-        $user->update([
-            'name' => $validatedata['name'],
-            'emai' => $validatedata['email'],
-            'password' => Hash::make($validatedata['password']),
-            'roles' => $validatedata['roles']
-        ]);
+        $validatedata['password'] = Hash::make($requestall['password']);
 
+        $user->update($validatedata);
         return \redirect()->route('employee.index')->with('info', 'data updated');
     }
 
